@@ -286,6 +286,7 @@
   .btn{height:46px;padding:0 22px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:transparent;cursor:pointer;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:background .2s, transform .2s, box-shadow .2s, border-color .2s}
   .btn:hover{border-color:var(--accent)}
   .btn.solid{background:#fff;color:#000;border-color:#fff}
+  a.btn{text-decoration:none}
   .btn.solid:hover{transform:translateY(-2px);box-shadow:0 10px 30px var(--shadow)}
   .btn svg{width:16px;height:16px}
 
@@ -355,6 +356,8 @@
   /* ---------- Recursos ---------- */
   .res{display:flex;gap:calc(var(--u)*1.4);align-items:center}
   .res .n{font-family:'Space Grotesk',sans-serif;font-weight:300;font-size:calc(var(--u)*3.6);color:transparent;-webkit-text-stroke:1px rgba(77,166,255,.7);line-height:1;min-width:1.4em}
+  .qr-box{background:#fff;border-radius:calc(var(--u)*1.4);padding:calc(var(--u)*1);width:min(100%, calc(var(--u)*24));margin:0 auto;box-shadow:0 0 0 6px rgba(10,132,255,.25), 0 20px 50px rgba(10,132,255,.3)}
+  .qr-box img{display:block;width:100%;height:auto}
   .res .type{font-family:'JetBrains Mono',monospace;font-size:max(10px,calc(var(--u)*.82));letter-spacing:.15em;text-transform:uppercase;color:var(--accent-2)}
 
   /* ---------- Cita final ---------- */
@@ -1190,16 +1193,26 @@
 
 <!-- ============ 35 · RECURSOS ============ -->
 <section class="slide" data-title="Recursos descargables" data-block="Cierre · Recursos" data-glow="30,10">
-  <div class="wrap gap-l">
-    <div class="gap-s">
-      <div class="kicker r" style="--d:0"><span class="ln"></span>Para que no tengas que anotar nada</div>
-      <h2 class="display h-l r" style="--d:1">Recursos <em class="s">descargables</em>.</h2>
+  <div class="wrap split" style="grid-template-columns:1.35fr .65fr">
+    <div class="gap-m">
+      <div class="gap-s">
+        <div class="kicker r" style="--d:0"><span class="ln"></span>Para que no tengas que anotar nada</div>
+        <h2 class="display h-l r" style="--d:1">Recursos <em class="s">descargables</em>.</h2>
+      </div>
+      <div class="grid g2" style="gap:calc(var(--u)*1.2)">
+        <div class="card hov res r" style="--d:2;padding:calc(var(--u)*1.6)"><span class="n">01</span><div><div class="type">Checklist</div><h3 style="margin-top:4px">IA y datos de pacientes</h3></div></div>
+        <div class="card hov res r" style="--d:3;padding:calc(var(--u)*1.6)"><span class="n">02</span><div><div class="type">Plantilla</div><h3 style="margin-top:4px">La instrucción en 5 partes</h3></div></div>
+        <div class="card hov res r" style="--d:4;padding:calc(var(--u)*1.6)"><span class="n">03</span><div><div class="type">Checklist</div><h3 style="margin-top:4px">Revisar lo que entrega la IA</h3></div></div>
+        <div class="card hov res r" style="--d:5;padding:calc(var(--u)*1.6)"><span class="n">04</span><div><div class="type">Guía</div><h3 style="margin-top:4px">Herramientas de la ponencia</h3></div></div>
+        <div class="card hov res r" style="--d:6;padding:calc(var(--u)*1.6)"><span class="n">05</span><div><div class="type">Plan</div><h3 style="margin-top:4px">Tu plan de 30 días</h3></div></div>
+        <div class="card hov res r" style="--d:7;padding:calc(var(--u)*1.6)"><span class="n">06</span><div><div class="type">Resumen</div><h3 style="margin-top:4px">Ley 21.719: lo esencial</h3></div></div>
+      </div>
     </div>
-    <div class="grid g2">
-      <div class="card hov res r" style="--d:2"><span class="n">01</span><div><div class="type">Checklist</div><h3 style="margin-top:4px">Antes de usar IA con datos de pacientes</h3></div></div>
-      <div class="card hov res r" style="--d:3"><span class="n">02</span><div><div class="type">Plantilla</div><h3 style="margin-top:4px">La instrucción en 5 partes</h3></div></div>
-      <div class="card hov res r" style="--d:4"><span class="n">03</span><div><div class="type">Checklist</div><h3 style="margin-top:4px">Revisa antes de publicar o firmar</h3></div></div>
-      <div class="card hov res r" style="--d:5"><span class="n">04</span><div><div class="type">Guía</div><h3 style="margin-top:4px">Herramientas de la ponencia</h3></div></div>
+    <div class="card qr-card center r" style="--d:5">
+      <div class="mono" style="margin-bottom:calc(var(--u)*1.4)">Escanea y descarga</div>
+      <div class="qr-box"><img src="assets/qr-recursos.svg" alt="Código QR a ponencia-ia-salud.vercel.app/recursos"></div>
+      <a class="btn solid" href="recursos/" target="_blank" rel="noopener" style="margin-top:calc(var(--u)*1.6)">Ir a los recursos<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="mono" style="margin-top:calc(var(--u)*1.2);text-transform:none;letter-spacing:.04em">ponencia-ia-salud.vercel.app/recursos</div>
     </div>
   </div>
 </section>

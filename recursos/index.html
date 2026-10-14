@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recursos · IA en Salud · LEVEL UP</title>
+<meta name="description" content="Descarga los recursos de la ponencia IA en Salud: De la Herramienta a la Acción — Elio Rincón · LEVEL UP">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000;--surface:#0B0E17;--ink:#fff;--ink-2:rgba(255,255,255,.72);--ink-3:rgba(255,255,255,.48);
+    --line:rgba(255,255,255,.10);--accent:#0A84FF;--accent-2:#4DA6FF;--accent-deep:#001F5C;
+    --ok:#34C759;--warn:#FF6B5E;--shadow:rgba(10,132,255,.35);--e:cubic-bezier(.2,.75,.2,1);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  body{font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+  ::selection{background:var(--accent);color:#fff}
+  em.s{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--accent-2)}
+
+  .atmo{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .atmo .glow{position:absolute;width:80vmax;height:80vmax;border-radius:50%;left:15%;top:-25%;transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(10,132,255,.30) 0%, rgba(10,132,255,.08) 35%, transparent 65%);animation:drift 18s ease-in-out infinite alternate}
+  .atmo .glow.b{left:95%;top:110%;width:60vmax;height:60vmax;background:radial-gradient(circle, rgba(0,31,92,.85) 0%, rgba(0,31,92,.25) 40%, transparent 70%);animation:none}
+  .atmo .dots{position:absolute;inset:0;background-image:radial-gradient(#fff 1px, transparent 1px);background-size:26px 26px;opacity:.05;
+    mask-image:radial-gradient(ellipse at center, #000 30%, transparent 80%);-webkit-mask-image:radial-gradient(ellipse at center, #000 30%, transparent 80%)}
+  @keyframes drift{from{translate:0 0}to{translate:4vw 3vh}}
+
+  header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(16px,4vw,48px)}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:16px;letter-spacing:-.02em;color:#fff;text-decoration:none}
+  .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  .pill{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:999px;padding:8px 16px;white-space:nowrap}
+
+  main{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:clamp(16px,4vh,48px) clamp(16px,4vw,48px) 64px;
+    display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,72px);align-items:center;min-height:calc(100vh - 84px)}
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:rgba(0,99,169,.53);border:1px solid var(--line);border-radius:999px;padding:9px 16px}
+  .kicker .ln{width:6px;height:6px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 10px var(--accent-2)}
+  h1{font-family:'Space Grotesk',sans-serif;font-weight:300;letter-spacing:-.03em;line-height:1.06;font-size:clamp(38px,5.4vw,72px);margin:22px 0 18px}
+  .lead{font-size:clamp(16px,1.35vw,19px);line-height:1.55;color:var(--ink-2);margin:0;max-width:52ch}
+
+  .res-list{list-style:none;padding:0;margin:28px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .res-list li{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);font-size:14px;line-height:1.3;transition:border-color .3s, translate .3s var(--e)}
+  .res-list li:hover{border-color:rgba(77,166,255,.5);translate:0 -2px}
+  .res-list .n{font-family:'Space Grotesk',sans-serif;font-weight:300;font-size:24px;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(77,166,255,.8);min-width:30px}
+  .res-list small{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2);margin-bottom:2px}
+
+  .speaker{display:flex;align-items:center;gap:14px;margin-top:28px}
+  .speaker img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--accent)}
+  .speaker b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:17px}
+  .speaker span{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+  .card{position:relative;border-radius:24px;padding:clamp(24px,3vw,40px);
+    background:radial-gradient(circle at 15% -15%, rgba(10,132,255,.17) 0%, transparent 55%), var(--surface);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+    background:linear-gradient(180deg, var(--accent) 0%, rgba(10,132,255,0) 65%);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+  .card h2{font-family:'Space Grotesk',sans-serif;font-weight:400;font-size:clamp(22px,2vw,28px);letter-spacing:-.02em;margin:0 0 6px}
+  .card .sub{color:var(--ink-2);font-size:14.5px;line-height:1.5;margin:0 0 24px}
+
+  .field{margin-bottom:16px}
+  .field label{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
+  .field label .req{color:var(--accent)}
+  .field input{width:100%;height:52px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#fff;
+    padding:0 16px;font:500 16px 'Inter',sans-serif;outline:none;transition:border-color .25s, box-shadow .25s, background .25s}
+  .field input::placeholder{color:rgba(255,255,255,.3);font-weight:400}
+  .field input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(10,132,255,.2);background:rgba(10,132,255,.06)}
+  .field.bad input{border-color:var(--warn);box-shadow:0 0 0 4px rgba(255,107,94,.14)}
+  .field .err{display:block;min-height:0;max-height:0;overflow:hidden;color:var(--warn);font-size:12.5px;margin-top:0;transition:max-height .3s, margin .3s}
+  .field.bad .err{max-height:40px;margin-top:6px}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+  .btn{width:100%;height:56px;border-radius:999px;border:0;background:#fff;color:#000;font:600 16px 'Inter',sans-serif;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px;transition:transform .2s, box-shadow .25s, background .2s;text-decoration:none}
+  .btn:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 12px 32px var(--shadow)}
+  .btn:active{transform:scale(.98)}
+  .btn svg{width:18px;height:18px;transition:translate .25s var(--e)}
+  .btn:hover svg{translate:3px 0}
+  .btn[disabled]{opacity:.7;pointer-events:none}
+  .spin{width:18px;height:18px;border-radius:50%;border:2px solid rgba(0,0,0,.2);border-top-color:#000;animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .privacy{font-size:12px;color:var(--ink-3);line-height:1.5;margin:16px 0 0;text-align:center}
+  .form-error{display:none;margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(255,107,94,.1);border:1px solid rgba(255,107,94,.35);color:#ffb3ab;font-size:13.5px}
+  .form-error.show{display:block}
+
+  /* éxito */
+  .view{transition:opacity .5s var(--e), transform .6s var(--e), filter .5s}
+  .view.out{opacity:0;transform:translateY(-14px) scale(.98);filter:blur(6px)}
+  .view[hidden]{display:none}
+  .success{text-align:center}
+  .check{width:84px;height:84px;margin:4px auto 20px;border-radius:50%;display:grid;place-items:center;
+    background:radial-gradient(circle at 30% 25%, rgba(52,199,89,.45), rgba(52,199,89,.12) 70%);border:1px solid rgba(52,199,89,.55);box-shadow:0 0 40px rgba(52,199,89,.25)}
+  .check svg{width:40px;height:40px;color:#fff}
+  .check path{stroke-dasharray:30;stroke-dashoffset:30;animation:draw .7s var(--e) .35s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .success .hello{font-family:'Space Grotesk',sans-serif;font-weight:300;font-size:clamp(26px,2.6vw,34px);letter-spacing:-.02em;margin:0 0 8px}
+  .success .btn{background:linear-gradient(135deg,#fff,#e8f1ff)}
+  .dl-meta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .chip{font-size:12px;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04)}
+  .again{background:none;border:0;color:var(--ink-3);font-size:12.5px;margin-top:18px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+  .again:hover{color:#fff}
+
+  /* entrada */
+  .in{opacity:0;transform:translateY(24px);filter:blur(6px);animation:in .9s var(--e) forwards;animation-delay:calc(var(--d,0) * 110ms + 150ms)}
+  @keyframes in{to{opacity:1;transform:none;filter:none}}
+  .pop{animation:pop .6s var(--e) both}
+  @keyframes pop{from{opacity:0;transform:scale(.92) translateY(10px)}to{opacity:1;transform:none}}
+
+  @media (max-width: 900px){
+    main{grid-template-columns:1fr;min-height:0;gap:18px}
+    main > section:first-child{display:contents}
+    main .kicker{order:1;justify-self:start}
+    main h1{order:2;margin:0}
+    main .lead{order:3}
+    main .card{order:4}
+    main .res-list{order:5;margin-top:0}
+    main .speaker{order:6;margin-top:0}
+    .res-list{grid-template-columns:1fr}
+    .pill{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="atmo" aria-hidden="true"><div class="glow"></div><div class="glow b"></div><div class="dots"></div></div>
+
+<header>
+  <a class="brand" href="../"><span class="dot"></span>LEVEL UP</a>
+  <span class="pill">IA en Salud · Recursos</span>
+</header>
+
+<main>
+  <section>
+    <div class="kicker in" style="--d:0"><span class="ln"></span>Recursos de la ponencia</div>
+    <h1 class="in" style="--d:1">Lleva la IA de la herramienta a la <em class="s">acción</em>.</h1>
+    <p class="lead in" style="--d:2">Déjanos tus datos y descarga gratis los 6 recursos de «IA en Salud: De la Herramienta a la Acción» para aplicarlos en tu consulta.</p>
+    <ul class="res-list">
+      <li class="in" style="--d:3"><span class="n">01</span><span><small>Checklist</small>IA y datos de pacientes</span></li>
+      <li class="in" style="--d:4"><span class="n">02</span><span><small>Plantilla</small>La instrucción en 5 partes</span></li>
+      <li class="in" style="--d:5"><span class="n">03</span><span><small>Checklist</small>Revisar lo que entrega la IA</span></li>
+      <li class="in" style="--d:6"><span class="n">04</span><span><small>Guía</small>Herramientas de la ponencia</span></li>
+      <li class="in" style="--d:7"><span class="n">05</span><span><small>Plan</small>Tu plan de 30 días</span></li>
+      <li class="in" style="--d:8"><span class="n">06</span><span><small>Resumen</small>Ley 21.719: lo esencial</span></li>
+    </ul>
+    <div class="speaker in" style="--d:9">
+      <img src="../assets/elio-rincon.png" alt="Elio Rincón">
+      <div><b>Elio Rincón</b><span>IA en Salud · LEVEL UP</span></div>
+    </div>
+  </section>
+
+  <section class="card in" style="--d:2" aria-live="polite">
+    <!-- Formulario -->
+    <div class="view" id="formView">
+      <h2>Descarga los recursos</h2>
+      <p class="sub">Completa tus datos y accede de inmediato a la descarga.</p>
+      <form id="leadForm" novalidate>
+        <div class="field" id="f-name">
+          <label for="name">Nombre y apellido <span class="req">*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" placeholder="Ej: Camila Rojas" required>
+          <span class="err">Escribe tu nombre y apellido.</span>
+        </div>
+        <div class="field" id="f-wa">
+          <label for="wa">WhatsApp <span class="req">*</span></label>
+          <input id="wa" name="wa" type="tel" inputmode="tel" autocomplete="tel" placeholder="Ej: +56 9 1234 5678" required>
+          <span class="err">Escribe un número de WhatsApp válido.</span>
+        </div>
+        <div class="field" id="f-email">
+          <label for="email">Correo electrónico <span class="req">*</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="Ej: camila@correo.com" required>
+          <span class="err">Escribe un correo electrónico válido.</span>
+        </div>
+        <input class="hp" type="text" name="website" id="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn" type="submit" id="submitBtn"><span id="btnLbl">Descargar recursos</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <div class="form-error" id="formError">No pudimos enviar tus datos. Revisa tu conexión e inténtalo de nuevo.</div>
+        <p class="privacy">Al enviar tus datos, aceptas que LEVEL UP te contacte con información relacionada con sus encuentros.</p>
+      </form>
+    </div>
+
+    <!-- Éxito -->
+    <div class="view success" id="successView" hidden>
+      <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <p class="hello" id="hello">¡Listo!</p>
+      <p class="sub">Tus recursos están listos. Descárgalos desde la carpeta compartida.</p>
+      <a class="btn pop" href="https://mega.nz/folder/ZN8SVASb#cXjvtU2_2SYHN0sxZROWiA" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+        Descargar los 6 recursos
+      </a>
+      <div class="dl-meta"><span class="chip">6 archivos</span><span class="chip">Carpeta en MEGA</span><span class="chip">Gratis</span></div>
+      <button class="again" type="button" id="againBtn">Registrar a otra persona</button>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const FORM_ID = '262861912632055';
+  const ACTION = 'https://submit.jotform.com/submit/' + FORM_ID;
+  const KEY = 'iasalud-recursos';
+
+  const $ = id => document.getElementById(id);
+  const form = $('leadForm'), formView = $('formView'), successView = $('successView');
+  const btn = $('submitBtn'), lbl = $('btnLbl'), err = $('formError');
+
+  const rules = {
+    name: v => v.trim().split(/\s+/).filter(w => w.length >= 2).length >= 2,
+    wa: v => v.replace(/\D/g, '').length >= 8 && v.replace(/\D/g, '').length <= 15,
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())
+  };
+  const fields = { name: 'f-name', wa: 'f-wa', email: 'f-email' };
+  function check(k){ const ok = rules[k]($(k).value); $(fields[k]).classList.toggle('bad', !ok); return ok; }
+  Object.keys(fields).forEach(k => {
+    $(k).addEventListener('blur', () => { if ($(k).value) check(k); });
+    $(k).addEventListener('input', () => { if ($(fields[k]).classList.contains('bad')) check(k); });
+  });
+
+  function showSuccess(name){
+    const first = (name || '').trim().split(/\s+/)[0];
+    $('hello').textContent = first ? `¡Listo, ${first}!` : '¡Listo!';
+    formView.classList.add('out');
+    setTimeout(() => {
+      formView.hidden = true; formView.classList.remove('out');
+      successView.hidden = false; successView.classList.add('out');
+      requestAnimationFrame(() => requestAnimationFrame(() => successView.classList.remove('out')));
+    }, 420);
+  }
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    err.classList.remove('show');
+    const valid = Object.keys(fields).map(check).every(Boolean);
+    if (!valid) { const first = Object.keys(fields).find(k => $(fields[k]).classList.contains('bad')); $(first).focus(); return; }
+    if ($('website').value) return; // bot
+
+    const fd = new FormData();
+    fd.append('formID', FORM_ID);
+    fd.append('simple_spc', FORM_ID + '-' + FORM_ID);
+    fd.append('website', '');
+    fd.append('q2_q2_textbox0', $('name').value.trim());
+    fd.append('q3_q3_textbox1', $('wa').value.trim());
+    fd.append('q4_q4_email2', $('email').value.trim());
+
+    btn.disabled = true;
+    lbl.textContent = 'Enviando…';
+    btn.querySelector('svg').outerHTML = '<span class="spin"></span>';
+    try {
+      await fetch(ACTION, { method: 'POST', mode: 'no-cors', body: fd });
+      try { localStorage.setItem(KEY, $('name').value.trim()); } catch (_) {}
+      showSuccess($('name').value);
+    } catch (_) {
+      err.classList.add('show');
+    } finally {
+      btn.disabled = false;
+      lbl.textContent = 'Descargar recursos';
+      const sp = btn.querySelector('.spin');
+      if (sp) sp.outerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+    }
+  });
+
+  $('againBtn').addEventListener('click', () => {
+    try { localStorage.removeItem(KEY); } catch (_) {}
+    form.reset();
+    successView.hidden = true; formView.hidden = false;
+    $('name').focus();
+  });
+
+  // si ya se registró en este navegador, va directo a la descarga
+  try { const saved = localStorage.getItem(KEY); if (saved) { formView.hidden = true; successView.hidden = false; $('hello').textContent = `¡Hola de nuevo, ${saved.split(/\s+/)[0]}!`; } } catch (_) {}
+})();
+</script>
+</body>
+</html>
