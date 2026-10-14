@@ -81,6 +81,14 @@
   .cbox input:focus-visible + .box{box-shadow:0 0 0 4px rgba(10,132,255,.25)}
   .cbox:hover .box{border-color:var(--accent-2)}
   .consent.bad .box{border-color:var(--warn);box-shadow:0 0 0 4px rgba(255,107,94,.14)}
+  .sel{position:relative}
+  .sel::after{content:'';position:absolute;right:18px;top:50%;width:8px;height:8px;border-right:2px solid var(--accent-2);border-bottom:2px solid var(--accent-2);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+  .field select{width:100%;height:52px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#fff;padding:0 44px 0 16px;font:500 16px 'Inter',sans-serif;outline:none;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color .25s, box-shadow .25s, background .25s}
+  .field select:invalid{color:rgba(255,255,255,.4);font-weight:400}
+  .field select:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(10,132,255,.2);background:rgba(10,132,255,.06)}
+  .field select option{background:#0B0E17;color:#fff}
+  .field.bad select{border-color:var(--warn);box-shadow:0 0 0 4px rgba(255,107,94,.14)}
+  .field.other:not([hidden]){animation:pop .45s var(--e) both}
   .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 
   .btn{width:100%;height:56px;border-radius:999px;border:0;background:#fff;color:#000;font:600 16px 'Inter',sans-serif;cursor:pointer;
@@ -181,6 +189,21 @@
           <input id="email" name="email" type="email" autocomplete="email" placeholder="Ej: camila@correo.com" required>
           <span class="err">Escribe un correo electrónico válido.</span>
         </div>
+        <div class="field" id="f-prof">
+          <label for="prof">Profesión <span class="req">*</span></label>
+          <div class="sel"><select id="prof" name="prof" required><option value="" disabled selected>Selecciona tu profesión</option><option>Médico</option><option>Odontólogo</option><option>Enfermero(a)</option><option>Kinesiólogo(a)</option><option>Psicólogo(a)</option><option>Nutricionista</option><option>Fonoaudiólogo(a)</option><option>Tecnólogo Médico</option><option>Terapeuta Ocupacional</option><option>TENS/TONS</option><option>Estudiante</option><option>Otro</option></select></div>
+          <span class="err">Selecciona tu profesión.</span>
+        </div>
+        <div class="field other" id="f-other" hidden>
+          <label for="other">¿Cuál es tu profesión? <span class="req">*</span></label>
+          <input id="other" name="other" type="text" placeholder="Escribe tu profesión">
+          <span class="err">Escribe tu profesión.</span>
+        </div>
+        <div class="field" id="f-country">
+          <label for="country">País de residencia <span class="req">*</span></label>
+          <div class="sel"><select id="country" name="country" autocomplete="country-name" required><option value="" disabled selected>Selecciona tu país</option><option>Argentina</option><option>Bolivia</option><option>Brasil</option><option>Chile</option><option>Colombia</option><option>Costa Rica</option><option>Cuba</option><option>Ecuador</option><option>El Salvador</option><option>Guatemala</option><option>Honduras</option><option>México</option><option>Nicaragua</option><option>Panamá</option><option>Paraguay</option><option>Perú</option><option>Puerto Rico</option><option>República Dominicana</option><option>Uruguay</option><option>Venezuela</option></select></div>
+          <span class="err">Selecciona tu país de residencia.</span>
+        </div>
         <div class="field consent" id="f-consent">
           <label class="cbox" for="consent">
             <input id="consent" name="consent" type="checkbox" required>
@@ -224,14 +247,23 @@
     name: v => v.trim().split(/\s+/).filter(w => w.length >= 2).length >= 2,
     wa: v => v.replace(/\D/g, '').length >= 8 && v.replace(/\D/g, '').length <= 15,
     email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
+    prof: v => !!v,
+    other: v => $('prof').value !== 'Otro' || v.trim().length >= 3,
+    country: v => !!v,
     consent: () => $('consent').checked
   };
-  const fields = { name: 'f-name', wa: 'f-wa', email: 'f-email', consent: 'f-consent' };
+  const fields = { name: 'f-name', wa: 'f-wa', email: 'f-email', prof: 'f-prof', other: 'f-other', country: 'f-country', consent: 'f-consent' };
   function check(k){ const ok = rules[k]($(k).value); $(fields[k]).classList.toggle('bad', !ok); return ok; }
   Object.keys(fields).forEach(k => {
     $(k).addEventListener('blur', () => { if ($(k).value) check(k); });
     $(k).addEventListener('input', () => { if ($(fields[k]).classList.contains('bad')) check(k); });
     $(k).addEventListener('change', () => { if ($(fields[k]).classList.contains('bad')) check(k); });
+  });
+
+  $('prof').addEventListener('change', () => {
+    const isOther = $('prof').value === 'Otro';
+    $('f-other').hidden = !isOther;
+    if (isOther) $('other').focus(); else { $('other').value = ''; $('f-other').classList.remove('bad'); }
   });
 
   function showSuccess(name){
@@ -259,6 +291,9 @@
     fd.append('q2_q2_textbox0', $('name').value.trim());
     fd.append('q3_q3_textbox1', $('wa').value.trim());
     fd.append('q4_q4_email2', $('email').value.trim());
+    fd.append('q7_profesion', $('prof').value);
+    fd.append('q8_otraProfesion', $('prof').value === 'Otro' ? $('other').value.trim() : '');
+    fd.append('q9_paisDe', $('country').value);
     fd.append('q6_autorizacionDe', 'Sí, autorizo a LEVEL UP a tratar mis datos personales para enviarme los recursos y contactarme con información de sus encuentros, de acuerdo con la Ley N° 21.719 sobre protección de datos personales.');
 
     btn.disabled = true;
@@ -281,6 +316,8 @@
   $('againBtn').addEventListener('click', () => {
     try { localStorage.removeItem(KEY); } catch (_) {}
     form.reset();
+    $('f-other').hidden = true;
+    document.querySelectorAll('.field.bad').forEach(f => f.classList.remove('bad'));
     successView.hidden = true; formView.hidden = false;
     $('name').focus();
   });
