@@ -48,7 +48,8 @@
   .res-list .n{font-family:'Space Grotesk',sans-serif;font-weight:300;font-size:24px;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(77,166,255,.8);min-width:30px}
   .res-list small{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2);margin-bottom:2px}
 
-  .speaker{display:flex;align-items:center;gap:14px;margin-top:28px}
+  .speaker{display:flex;align-items:center;gap:14px;margin-top:22px}
+  .speaker + h1{margin-top:18px}
   .speaker img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--accent)}
   .speaker b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:17px}
   .speaker span{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
@@ -122,11 +123,11 @@
     main{grid-template-columns:1fr;min-height:0;gap:18px}
     main > section:first-child{display:contents}
     main .kicker{order:1;justify-self:start}
-    main h1{order:2;margin:0}
-    main .lead{order:3}
-    main .card{order:4}
+    main .speaker{order:2;margin-top:0}
+    main h1{order:3;margin:0}
+    main .lead{order:4}
     main .res-list{order:5;margin-top:0}
-    main .speaker{order:6;margin-top:0}
+    main .card{order:6}
     .res-list{grid-template-columns:1fr}
     .pill{display:none}
   }
@@ -143,8 +144,12 @@
 <main>
   <section>
     <div class="kicker in" style="--d:0"><span class="ln"></span>Recursos de la ponencia</div>
-    <h1 class="in" style="--d:1">Lleva la IA de la herramienta a la <em class="s">acción</em>.</h1>
-    <p class="lead in" style="--d:2">Déjanos tus datos y descarga gratis los 6 recursos de «IA en Salud: De la Herramienta a la Acción» para aplicarlos en tu consulta.</p>
+    <div class="speaker in" style="--d:1">
+      <img src="../assets/elio-rincon.png" alt="Elio Rincón">
+      <div><b>Elio Rincón</b><span>IA en Salud · LEVEL UP</span></div>
+    </div>
+    <h1 class="in" style="--d:2">Lleva la IA de la herramienta a la <em class="s">acción</em>.</h1>
+    <p class="lead in" style="--d:3">Déjanos tus datos y descarga gratis los 6 recursos de «IA en Salud: De la Herramienta a la Acción» para aplicarlos en tu consulta.</p>
     <ul class="res-list">
       <li class="in" style="--d:3"><span class="n">01</span><span><small>Checklist</small>IA y datos de pacientes</span></li>
       <li class="in" style="--d:4"><span class="n">02</span><span><small>Plantilla</small>La instrucción en 5 partes</span></li>
@@ -153,10 +158,6 @@
       <li class="in" style="--d:7"><span class="n">05</span><span><small>Plan</small>Tu plan de 30 días</span></li>
       <li class="in" style="--d:8"><span class="n">06</span><span><small>Resumen</small>Ley 21.719: lo esencial</span></li>
     </ul>
-    <div class="speaker in" style="--d:9">
-      <img src="../assets/elio-rincon.png" alt="Elio Rincón">
-      <div><b>Elio Rincón</b><span>IA en Salud · LEVEL UP</span></div>
-    </div>
   </section>
 
   <section class="card in" style="--d:2" aria-live="polite">
