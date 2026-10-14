@@ -281,9 +281,6 @@
   .live i{width:9px;height:9px;border-radius:50%;background:#FF3B30;animation:rec 1.4s ease-in-out infinite}
   @keyframes rec{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,59,48,.6)}50%{opacity:.5;box-shadow:0 0 0 8px rgba(255,59,48,0)}}
   .demo-num{font-family:'Space Grotesk',sans-serif;font-weight:300;font-size:calc(var(--u)*13);line-height:.85;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px rgba(77,166,255,.55)}
-  .input-live{width:100%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);border-radius:16px;padding:1em 1.2em;color:#fff;font:inherit;font-size:max(15px,calc(var(--u)*1.4));outline:none;transition:border-color .3s, box-shadow .3s}
-  .input-live:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(10,132,255,.2)}
-  .q-echo{font-family:'Space Grotesk',sans-serif;font-weight:300;font-size:calc(var(--u)*3);line-height:1.2;min-height:1.2em;letter-spacing:-.02em}
   .watch{font-family:'JetBrains Mono',monospace;font-size:calc(var(--u)*7);letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
   .watch.run{color:var(--accent-2);text-shadow:0 0 30px rgba(10,132,255,.5)}
   .btn{height:46px;padding:0 22px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:transparent;cursor:pointer;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:background .2s, transform .2s, box-shadow .2s, border-color .2s}
@@ -314,7 +311,13 @@
   .msg.bot.on .dots{animation:hideDots .01s 1.1s forwards}
   .msg.bot.on .txt{animation:showTxt .5s 1.1s forwards}
   @keyframes hideDots{to{max-height:0;padding:0}}
-  @keyframes showTxt{to{max-height:400px;opacity:1}}
+  @keyframes showTxt{to{max-height:1200px;opacity:1}}
+  .chat-body.scroll{height:calc(var(--u)*42);min-height:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(77,166,255,.35) transparent}
+  .chat-body.scroll .step:not(.on){display:none}
+  .chat-body.scroll .step.on{animation:msgIn .55s var(--e) both}
+  @keyframes msgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .msg .piece-t{display:block;font-family:'JetBrains Mono',monospace;font-size:.78em;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2);margin-bottom:6px}
+  .msg.me{max-width:90%}
   .handoff{align-self:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ok);border:1px solid rgba(52,199,89,.4);background:rgba(52,199,89,.1);border-radius:999px;padding:6px 12px}
 
   /* ---------- Cierre de área ---------- */
@@ -939,19 +942,23 @@
 </section>
 
 <!-- ============ 23 · DEMO 1 ============ -->
-<section class="slide" data-title="Demo 1 · De una pregunta a cinco piezas" data-block="Área 1 · Demo en vivo" data-glow="85,85">
+<section class="slide" data-title="Demo 1 · Una pregunta, contenido listo" data-block="Área 1 · Demo en vivo" data-glow="85,85">
   <div class="wrap split">
     <div class="gap-m">
       <div class="live r" style="--d:0"><i></i>Demo en vivo</div>
       <div class="demo-num r" style="--d:1">01</div>
-      <h2 class="display h-l r" style="--d:2">Tu pregunta, convertida en <em class="s">contenido</em>.</h2>
-      <p class="lead r" style="--d:3">Una pregunta real del público se convierte en guion, carrusel y respuesta de WhatsApp, aquí mismo.</p>
+      <h2 class="display h-l r" style="--d:2">Una instrucción, <em class="s">tres piezas</em> listas.</h2>
+      <p class="lead r" style="--d:3">Una pregunta frecuente se convierte en guion de video, carrusel y respuesta de WhatsApp. Tú revisas antes de publicar.</p>
     </div>
-    <div class="card gap-m r" style="--d:3">
-      <div class="mono">Pregunta del público</div>
-      <input class="input-live" id="qInput" type="text" placeholder="Escribe aquí la pregunta…" autocomplete="off">
-      <div class="q-echo" id="qEcho">«…»</div>
-      <div class="chips"><span class="chip">Guion</span><span class="chip">Carrusel</span><span class="chip">Respuesta de WhatsApp</span></div>
+    <div class="chat r" style="--d:3">
+      <div class="chat-head"><span class="av" data-ic="spark"></span><div><b>Asistente de IA</b><small>● Centro Demo · contenido</small></div><span class="mono" style="margin-left:auto">Captar</span></div>
+      <div class="chat-body scroll">
+        <div class="msg me step" data-step="1">Actúa como kinesiólogo con 10 años de experiencia. Convierte esta pregunta frecuente en contenido: «¿Es normal que me duela la espalda después de estar sentado todo el día?». Es para personas que trabajan sentadas. Entrégame un guion de video de 45 segundos, un carrusel de 5 láminas y una respuesta para WhatsApp. No prometas resultados ni des indicaciones personalizadas.<time>10:02</time></div>
+        <div class="msg bot step" data-step="2"><span class="dots"><i></i><i></i><i></i></span><span class="txt"><b class="piece-t">Guion de video · 45 s</b><b>Escena 1 (0–10 s)</b> · Texto en pantalla: «¿Te duele la espalda después de trabajar sentado?». A cámara: «Si pasas muchas horas frente al escritorio, esto es para ti».<br><b>Escena 2 (10–35 s)</b> · Texto en pantalla: «3 hábitos simples». Explica por qué pasar mucho tiempo en la misma postura puede generar molestias y muestra tres hábitos: pausas para moverte, ajustar la silla y la pantalla a la altura de los ojos.<br><b>Escena 3 (35–45 s)</b> · Texto en pantalla: «Agenda tu evaluación». Cierre: «Si la molestia se mantiene, lo mejor es que un profesional te evalúe. Agenda tu hora en Centro Demo».<time>10:02</time></span></div>
+        <div class="msg bot step" data-step="3"><span class="dots"><i></i><i></i><i></i></span><span class="txt"><b class="piece-t">Carrusel · 5 láminas</b>1. ¿Te duele la espalda al final del día?<br>2. Estar sentado muchas horas también cansa<br>3. 3 hábitos simples: pausas, silla y pantalla<br>4. Si la molestia se mantiene, consulta<br>5. Agenda tu evaluación en Centro Demo<time>10:03</time></span></div>
+        <div class="msg bot step" data-step="4"><span class="dots"><i></i><i></i><i></i></span><span class="txt"><b class="piece-t">Respuesta para WhatsApp</b>«¡Hola! Gracias por escribirnos. Las molestias de espalda al trabajar sentado son una consulta muy frecuente. Para orientarte bien, lo ideal es una evaluación con nuestro equipo. ¿Te ayudamos a agendar una hora?»<time>10:03</time></span></div>
+        <div class="handoff step" data-step="5">✓ 3 piezas listas · revisar antes de publicar</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1313,6 +1320,9 @@
     s.querySelectorAll('svg.lines path[data-line]').forEach(p => {
       p.style.strokeDashoffset = (+p.dataset.line <= n) ? 0 : 600;
     });
+    // chat con scroll: baja al último mensaje
+    const cb = s.querySelector('.chat-body.scroll');
+    if (cb) [60, 1250].forEach(t => setTimeout(() => cb.scrollTo({ top: cb.scrollHeight, behavior: 'smooth' }), t));
     // barra de semanas
     const wb = s.querySelector('#weekBar');
     if (wb) wb.style.width = (Math.min(n, 4) / 4 * 100) + '%';
@@ -1480,8 +1490,6 @@
   }).observe(document.querySelector('.qchips'), { subtree: true, attributes: true, attributeFilter: ['class'] });
 
   /* demo 1: pregunta del público */
-  const qInput = $('qInput'), qEcho = $('qEcho');
-  qInput.addEventListener('input', () => { qEcho.textContent = qInput.value.trim() ? `«${qInput.value.trim()}»` : '«…»'; });
 
   /* demo 2: cronómetro y contador de errores */
   let wStart = 0, wAcc = 0, wRaf = null;
