@@ -71,6 +71,15 @@
   .field.bad input{border-color:var(--warn);box-shadow:0 0 0 4px rgba(255,107,94,.14)}
   .field .err{display:block;min-height:0;max-height:0;overflow:hidden;color:var(--warn);font-size:12.5px;margin-top:0;transition:max-height .3s, margin .3s}
   .field.bad .err{max-height:40px;margin-top:6px}
+  .cbox{display:flex !important;align-items:flex-start;gap:12px;cursor:pointer;text-transform:none !important;letter-spacing:0 !important;font-family:'Inter',sans-serif !important;font-size:13.5px !important;line-height:1.5;color:var(--ink-2) !important;margin:4px 0 0 !important}
+  .cbox input{position:absolute;opacity:0;width:1px;height:1px}
+  .cbox .box{flex-shrink:0;width:22px;height:22px;margin-top:1px;border-radius:7px;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.04);display:grid;place-items:center;transition:background .25s, border-color .25s, box-shadow .25s}
+  .cbox .box svg{width:14px;height:14px;color:#000;opacity:0;transform:scale(.4);transition:opacity .25s, transform .3s var(--e)}
+  .cbox input:checked + .box{background:var(--accent-2);border-color:var(--accent-2)}
+  .cbox input:checked + .box svg{opacity:1;transform:none}
+  .cbox input:focus-visible + .box{box-shadow:0 0 0 4px rgba(10,132,255,.25)}
+  .cbox:hover .box{border-color:var(--accent-2)}
+  .consent.bad .box{border-color:var(--warn);box-shadow:0 0 0 4px rgba(255,107,94,.14)}
   .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 
   .btn{width:100%;height:56px;border-radius:999px;border:0;background:#fff;color:#000;font:600 16px 'Inter',sans-serif;cursor:pointer;
@@ -171,10 +180,17 @@
           <input id="email" name="email" type="email" autocomplete="email" placeholder="Ej: camila@correo.com" required>
           <span class="err">Escribe un correo electrónico válido.</span>
         </div>
+        <div class="field consent" id="f-consent">
+          <label class="cbox" for="consent">
+            <input id="consent" name="consent" type="checkbox" required>
+            <span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="ctext">Autorizo a LEVEL UP a usar mis datos para enviarme los recursos y contactarme con información de sus encuentros. <span class="req">*</span></span>
+          </label>
+          <span class="err">Debes aceptar la autorización para descargar los recursos.</span>
+        </div>
         <input class="hp" type="text" name="website" id="website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button class="btn" type="submit" id="submitBtn"><span id="btnLbl">Descargar recursos</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         <div class="form-error" id="formError">No pudimos enviar tus datos. Revisa tu conexión e inténtalo de nuevo.</div>
-        <p class="privacy">Al enviar tus datos, aceptas que LEVEL UP te contacte con información relacionada con sus encuentros.</p>
       </form>
     </div>
 
@@ -206,13 +222,15 @@
   const rules = {
     name: v => v.trim().split(/\s+/).filter(w => w.length >= 2).length >= 2,
     wa: v => v.replace(/\D/g, '').length >= 8 && v.replace(/\D/g, '').length <= 15,
-    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
+    consent: () => $('consent').checked
   };
-  const fields = { name: 'f-name', wa: 'f-wa', email: 'f-email' };
+  const fields = { name: 'f-name', wa: 'f-wa', email: 'f-email', consent: 'f-consent' };
   function check(k){ const ok = rules[k]($(k).value); $(fields[k]).classList.toggle('bad', !ok); return ok; }
   Object.keys(fields).forEach(k => {
     $(k).addEventListener('blur', () => { if ($(k).value) check(k); });
     $(k).addEventListener('input', () => { if ($(fields[k]).classList.contains('bad')) check(k); });
+    $(k).addEventListener('change', () => { if ($(fields[k]).classList.contains('bad')) check(k); });
   });
 
   function showSuccess(name){
@@ -240,6 +258,7 @@
     fd.append('q2_q2_textbox0', $('name').value.trim());
     fd.append('q3_q3_textbox1', $('wa').value.trim());
     fd.append('q4_q4_email2', $('email').value.trim());
+    fd.append('q6_autorizacionDe', 'Sí, autorizo a LEVEL UP a usar mis datos para enviarme los recursos y contactarme con información de sus encuentros.');
 
     btn.disabled = true;
     lbl.textContent = 'Enviando…';
